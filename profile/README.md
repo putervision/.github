@@ -1,187 +1,139 @@
 # PuterVision 👁️⚡
 
-> **The Cognitive Pentad for Autonomous AI Agents** — Local-first Model Context Protocol (MCP) infrastructure providing persistent state memory, perceptual vision caching, 3D/2D spatial world models, strategic BDI reasoning, and high-frequency behavior execution.
+> **The Cognitive Pentad for Autonomous AI Agents** — Local-first Model Context Protocol (MCP) infrastructure providing persistent state memory, perceptual vision caching, 3D/2D spatial world models, strategic BDI reasoning, and Jev-style "System One" fast decision execution.
 
 [![Organization](https://img.shields.io/badge/org-putervision-06b6d4.svg?style=flat-square)](https://github.com/putervision)
 [![Protocol](https://img.shields.io/badge/MCP-Model%20Context%20Protocol-6366f1.svg?style=flat-square)](https://modelcontextprotocol.io/)
-[![Architecture](https://img.shields.io/badge/Architecture-Cognitive%20Pentad-10b981.svg?style=flat-square)](https://putervision.com)
+[![Architecture](https://img.shields.io/badge/Architecture-Cognitive%20Pentad%20%2B%20System%201-10b981.svg?style=flat-square)](https://github.com/putervision/.github/blob/main/profile/ARCHITECTURE.md)
 [![Privacy](https://img.shields.io/badge/Privacy-100%25%20Local--First-f59e0b.svg?style=flat-square)](https://putervision.com)
-[![Tests](https://img.shields.io/badge/Tests-1%2C253%20Passing%20(100%25)-brightgreen.svg?style=flat-square)](https://github.com/putervision)
+[![Tests](https://img.shields.io/badge/Tests-1%2C701%20Passing%20(100%25)-brightgreen.svg?style=flat-square)](https://github.com/putervision)
 [![Sync](https://img.shields.io/badge/Pentad%20Sync-Zero%20Drift%20Verified-blue.svg?style=flat-square)](https://github.com/putervision)
 
 ---
 
 ## 🌐 Overview
 
-**PuterVision** engineers high-performance, zero-telemetry, local-first infrastructure and Model Context Protocol (MCP) servers for autonomous AI agents, coding assistants, and browser automation runtimes.
+**PuterVision** engineers high-performance, zero-telemetry, local-first infrastructure and Model Context Protocol (MCP) servers for autonomous AI agents, coding assistants, and high-frequency browser/game automation runtimes.
 
-Modern frontier LLMs possess extraordinary semantic reasoning but suffer from fundamental architectural bottlenecks:
-- **Stateless Ephemeral Contexts**: "Agent amnesia" across tool steps, compaction cycles, and restarts.
-- **Visual Token Bloat & Hallucinations**: Re-ingesting raw screen pixels costs thousands of tokens per step and degrades reasoning fidelity.
-- **Absence of Spatial & Object Permanence**: Inability to track unobserved entities, physical bounds, or 3D view projections.
-- **Uncalibrated Deliberation**: Ad-hoc tool execution without formal multi-objective utility scoring or risk quantification.
-- **Sluggish, Non-Deterministic Action Loops**: High-latency LLM roundtrips incapable of handling reactive events or ~60Hz browser/game controls.
+Modern frontier LLMs possess remarkable semantic reasoning but suffer from fundamental architectural bottlenecks when interacting with continuous, real-time environments:
+- **Stateless Ephemeral Contexts**: "Agent amnesia" across tool steps, compaction cycles, and session restarts.
+- **Visual Token Bloat & Hallucination**: Re-ingesting raw screen pixels burns thousands of tokens per step, induces latency, and degrades reasoning fidelity.
+- **Absence of Spatial & Object Permanence**: Inability to track unobserved entities, physical collision bounds, or 3D view projections.
+- **Uncalibrated Deliberation**: Ad-hoc tool execution without formal multi-objective utility scoring or quantitative risk calculation.
+- **Sluggish, Non-Deterministic Action Loops**: Multi-second LLM roundtrips incapable of handling reactive events or ~60Hz browser/game controls.
 
-The **PuterVision Cognitive Pentad** solves these limitations through a modular, synergistic local-first architecture. Backed by local SQLite databases in WAL mode, sub-millisecond dispatch, SHA-256 Merkle audit trails, and zero external network calls, each server handles a distinct cognitive tier while seamlessly interoperating across shared data structures.
+The **PuterVision Cognitive Pentad** resolves these bottlenecks through a modular, synergistic architecture. Backed by local SQLite databases in WAL mode, sub-millisecond retrieval, SHA-256 Merkle audit trails, and zero external network calls, each server handles a distinct cognitive tier while seamlessly interoperating across shared data structures.
 
 ---
 
-## 🧠 The PuterVision Cognitive Pentad
+## ⚡ The Dual-Process Loop: Jev-Style "System One" Fast Path
+
+Inspired by dual-process cognitive science and high-frequency agent architectures pioneered by community innovators such as **Jev** (who demonstrated the power of decoupling fast, non-generative classification and action gating from slow frontier LLM calls), PuterVision introduces a formalized **Jev-Style "System One" Fast Decision Layer**:
+
+1. **System 1 (Fast, Intuitive, Non-Generative)**:
+   - Operates in **$<1\text{ms}$** using local in-memory LRU caches, heuristic decision trees, and vector centroid matching.
+   - Evaluates typed, non-generative primitives: categorical labeling (`classify`), Boolean propositions (`ask_noul`), discrete alternatives (`ask_choice`), scalar scoring (`ask_score`), and blast-radius security gating (`gate_intention`).
+   - Strictly **abstains** when features are sparse or margins are ambiguous ($\Delta u < 0.25$), triggering clean escalation without hallucinations.
+2. **System 2 (Slow, Deliberative, BDI Cognition)**:
+   - Operates on longer horizons ($\sim 1\text{s} - 5\text{s}$) for multi-step strategic planning.
+   - Decomposes high-level objectives into dependency DAGs, updates beliefs with exponential decay, computes expected multi-attribute utilities (\(E[U] = \sum w_i u_i\)), and replans upon structural blockers.
 
 ```mermaid
 flowchart TD
-    subgraph Perception ["1. Perception & Grounding"]
-        VM["👁️ vision-memory-mcp (v1.2.1)<br/>Perceptual Cache & Element Grounding"]
+    subgraph Slices ["Compact Multi-Modal Slices (<2KB)"]
+        VM["👁️ vision-memory-mcp (v1.3.0)<br/>Compact Visual Slice & Centroids"]
+        WM["🌐 world-model-mcp (v0.5.0)<br/>Compact Spatial Slice & Nearest Entities"]
+        SM["💾 state-memory-mcp (v1.3.0)<br/>Compact TaskSlice & Active Blockers"]
     end
 
-    subgraph Spatial ["2. Spatial World Model"]
-        WM["🌐 world-model-mcp (v0.4.1)<br/>3D/2D Spatial Memory & Frustum"]
+    subgraph StatePackAssembly ["Canonical Contract (§10.1)"]
+        SP["📦 Canonical StatePack<br/>Deterministic UTF-8 JSON + SHA-256 Merkle Hash"]
     end
 
-    subgraph State ["3. Workflow State Memory"]
-        SM["💾 state-memory-mcp (v1.2.1)<br/>Task DAGs, Decisions & Graph RAG"]
+    subgraph System2 ["System 2: Strategic Deliberation (1s - 5s)"]
+        BDI["🧭 BDI Cognition Engine<br/>Goal DAGs • Beliefs • Utility E[U] • Replanning"]
     end
 
-    subgraph Cognition ["4. Strategic Deliberation"]
-        AR["🧭 agent-reasoning-mcp (v0.2.1)<br/>BDI Planning, Utility & Risk"]
+    subgraph System1 ["System 1: Jev-Style Fast Decision Layer (<1ms)"]
+        DE["⚡ DecisionEngine (L1 / L2)<br/>classify • ask_noul • ask_choice • ask_score"]
+        IG["🛡️ gate_intention<br/>Blast-Radius Audit & HMAC-SHA256 Token Issuance"]
     end
 
-    subgraph Execution ["5. High-Frequency Runtime"]
-        BM["⚡ behavior-mcp (v0.2.1)<br/>~60Hz Behavior Trees & Safety Stack"]
+    subgraph Runtime ["High-Frequency Execution (~60Hz)"]
+        BM["⚡ behavior-mcp (v0.3.0)<br/>Synchronous semantic_check • Reactive Triggers • HMAC Verify"]
     end
 
-    VM -->|Visual Grounding & AX Detections| WM
-    VM -->|Visual Proof & State Hashes| SM
-    WM -->|Spatial Map & Entity Proximity| AR
-    SM -->|Active Goals, Plans & Blockers| AR
-    AR -->|Action Directives & Intentions| BM
-    BM -->|Execution Telemetry & Outcomes| SM
-    BM -->|Action Feedback & Obstacles| AR
+    VM --> SP
+    WM --> SP
+    SM --> SP
+    SP --> BDI
+    SP --> DE
+    BDI -->|Strategic Directives| IG
+    DE -->|Fast Verdicts| IG
+    IG -->|HMAC Dispatch Token| BM
+    BM -->|Execution Telemetry & Significant Decisions| SM
 ```
 
-### Core Pentad MCP Servers
+---
 
-| Project | Version | Badges | Focus & Capabilities | Links |
+## 🧠 Core Pentad MCP Servers
+
+The Pentad exposes a unified surface of **68 specialized Model Context Protocol tools** across 5 local-first servers:
+
+| Project | Version | Badges | Focus & Capabilities | Deep-Dive Links |
 | :--- | :---: | :--- | :--- | :--- |
-| **`state-memory-mcp`** | `1.2.1` | [![npm](https://img.shields.io/npm/v/@putervision/state-memory-mcp.svg)](https://www.npmjs.com/package/@putervision/state-memory-mcp) [![CI](https://github.com/putervision/state-memory-mcp/actions/workflows/ci.yml/badge.svg)](https://github.com/putervision/state-memory-mcp/actions/workflows/ci.yml) | **Persistent Workflow State Memory (15 Tools)**<br/>Zero-infrastructure, deterministic property graph backed by local SQLite in WAL mode. Tracks tasks, architectural decisions, artifacts, plans, and blockers. Features FTS5 full-text search, DAG cycle detection, multi-turn session attribution, SHA-256 Merkle audit chains, and WebGL 3D graph visualization. | [GitHub](https://github.com/putervision/state-memory-mcp) • [npm](https://www.npmjs.com/package/@putervision/state-memory-mcp) • [Website](https://statememorymcp.com) |
-| **`vision-memory-mcp`** | `1.2.1` | [![npm](https://img.shields.io/npm/v/@putervision/vision-memory-mcp.svg)](https://www.npmjs.com/package/@putervision/vision-memory-mcp) [![CI](https://github.com/putervision/vision-memory-mcp/actions/workflows/ci.yml/badge.svg)](https://github.com/putervision/vision-memory-mcp/actions/workflows/ci.yml) | **Visual Memory & Perceptual Grounding (15 Tools)**<br/>Local-first perceptual cache using perceptual hashing (dHash/pHash), local CLIP vector embeddings via LanceDB, and Accessibility (AX) tree element grounding. Eliminates up to 90% of redundant vision LLM calls while predicting precise click/type coordinates and verifying Visual SDD specs. | [GitHub](https://github.com/putervision/vision-memory-mcp) • [npm](https://www.npmjs.com/package/@putervision/vision-memory-mcp) • [Website](https://visionmemorymcp.com) |
-| **`world-model-mcp`** | `0.4.1` | [![npm](https://img.shields.io/npm/v/@putervision/world-model-mcp.svg)](https://www.npmjs.com/package/@putervision/world-model-mcp) [![CI](https://github.com/putervision/world-model-mcp/actions/workflows/ci.yml/badge.svg)](https://github.com/putervision/world-model-mcp/actions/workflows/ci.yml) | **3D/2D Spatial World Model (15 Tools)**<br/>Deterministic spatial internal world model for AI agents. Delivers persistent entity tracking, object permanence across occlusions with confidence decay, spatial topological relations (`on`, `inside`, `near`), AABB collision prediction, expected view frustum projection, Three.js bridge, and Playwright 3D automation. | [GitHub](https://github.com/putervision/world-model-mcp) • [npm](https://www.npmjs.com/package/@putervision/world-model-mcp) • [Website](https://worldmodelmcp.com) |
-| **`agent-reasoning-mcp`** | `0.2.1` | [![npm](https://img.shields.io/npm/v/@putervision/agent-reasoning-mcp.svg)](https://www.npmjs.com/package/@putervision/agent-reasoning-mcp) [![CI](https://github.com/putervision/agent-reasoning-mcp/actions/workflows/ci.yml/badge.svg)](https://github.com/putervision/agent-reasoning-mcp/actions/workflows/ci.yml) | **Strategic BDI Cognitive Engine (10 Tools)**<br/>Formal Belief-Desire-Intention cognitive deliberation framework. Decomposes complex objectives into dependency DAGs, computes multi-objective expected utility scores (\(E[U] = \sum w_i u_i\)), assesses quantitative risk, decays belief confidences, and triggers adaptive replanning upon obstacles. | [GitHub](https://github.com/putervision/agent-reasoning-mcp) • [npm](https://www.npmjs.com/package/@putervision/agent-reasoning-mcp) • [Website](https://agentreasoningmcp.com) |
-| **`behavior-mcp`** | `0.2.1` | [![npm](https://img.shields.io/npm/v/@putervision/behavior-mcp.svg)](https://www.npmjs.com/package/@putervision/behavior-mcp) [![CI](https://github.com/putervision/behavior-mcp/actions/workflows/ci.yml/badge.svg)](https://github.com/putervision/behavior-mcp/actions/workflows/ci.yml) | **~60Hz Behavior Tree Execution Engine (10 Tools)**<br/>High-frequency in-browser behavior tree tactical runtime. Delivers deterministic execution with priority reactive triggers, cooldown guards, a 5-layer fail-closed safety stack, telemetry capture, deterministic action sequence replay, stuck recovery, and SHA-256 Merkle audit verification. | [GitHub](https://github.com/putervision/behavior-mcp) • [npm](https://www.npmjs.com/package/@putervision/behavior-mcp) • [Website](https://behaviormcp.com) |
+| **`state-memory-mcp`** | `1.3.0` | [![npm](https://img.shields.io/npm/v/@putervision/state-memory-mcp.svg?style=flat-square)](https://www.npmjs.com/package/@putervision/state-memory-mcp) | **Persistent Workflow State Memory (13 Tools)**<br/>Zero-infrastructure, deterministic property graph backed by local SQLite in WAL mode. Tracks tasks, architectural decisions, artifacts, plans, and blockers. Features FTS5 search, DAG cycle detection, multi-turn session attribution, SHA-256 Merkle audit chains, WebGL 3D graph visualization, compact `TaskSlice` queries, and thresholded fast decision logging. | [GitHub](https://github.com/putervision/state-memory-mcp) • [Website](https://statememorymcp.com) |
+| **`vision-memory-mcp`** | `1.3.0` | [![npm](https://img.shields.io/npm/v/@putervision/vision-memory-mcp.svg?style=flat-square)](https://www.npmjs.com/package/@putervision/vision-memory-mcp) | **Visual Memory & Perceptual Grounding (15 Tools)**<br/>Local-first perceptual cache using perceptual hashing (dHash/pHash), local CLIP vector embeddings via LanceDB, and Accessibility (AX) tree element grounding. Eliminates up to 90% of redundant vision LLM calls while predicting precise click/type coordinates, verifying Visual SDD specs, and exporting sub-1KB `compact_slice` representations. | [GitHub](https://github.com/putervision/vision-memory-mcp) • [Website](https://visionmemorymcp.com) |
+| **`world-model-mcp`** | `0.5.0` | [![npm](https://img.shields.io/npm/v/@putervision/world-model-mcp.svg?style=flat-square)](https://www.npmjs.com/package/@putervision/world-model-mcp) | **3D/2D Spatial World Model (15 Tools)**<br/>Deterministic spatial internal world model for AI agents. Delivers persistent entity tracking, object permanence across occlusions with confidence decay, spatial topological relations (`on`, `inside`, `near`), AABB collision prediction, expected view frustum projection, Three.js bridge, Playwright 3D automation, and observer-relative `compact_slice` ($K \le 16$ nearest entities). | [GitHub](https://github.com/putervision/world-model-mcp) • [Website](https://worldmodelmcp.com) |
+| **`agent-reasoning-mcp`** | `0.3.0` | [![npm](https://img.shields.io/npm/v/@putervision/agent-reasoning-mcp.svg?style=flat-square)](https://www.npmjs.com/package/@putervision/agent-reasoning-mcp) | **Strategic BDI Engine & System 1 Fast Decision Layer (15 Tools)**<br/>Formal Belief-Desire-Intention cognitive deliberation framework + Jev-style typed non-generative System 1 fast path (`classify`, `ask_noul`, `ask_choice`, `ask_score`, `gate_intention`). Decomposes complex objectives into dependency DAGs, computes multi-objective expected utility scores (\(E[U] = \sum w_i u_i\)), assesses quantitative risk, decays belief confidences, signs HMAC intention dispatch tokens, and triggers adaptive replanning. | [GitHub](https://github.com/putervision/agent-reasoning-mcp) • [Website](https://agentreasoningmcp.com) |
+| **`behavior-mcp`** | `0.3.0` | [![npm](https://img.shields.io/npm/v/@putervision/behavior-mcp.svg?style=flat-square)](https://www.npmjs.com/package/@putervision/behavior-mcp) | **~60Hz Behavior Tree Execution Engine (10 Tools)**<br/>High-frequency in-browser behavior tree tactical runtime. Delivers deterministic execution with priority reactive triggers, cooldown guards, synchronous `semantic_check` blackboard condition nodes, HMAC intention dispatch token verification, a 5-layer fail-closed safety stack, telemetry capture, deterministic action sequence replay, stuck recovery, and SHA-256 Merkle audits. | [GitHub](https://github.com/putervision/behavior-mcp) • [Website](https://behaviormcp.com) |
+
+*The cluster is supervised by [**`@putervision/harness`**](https://github.com/putervision/harness) (`v0.3.0`), providing continuous loop supervision, dashboard monitoring, and fast-classifier model routing.*
 
 ---
 
-## 🛠️ Pentad 65-Tool Registry Summary
+## 📦 Ecosystem & Supporting Projects
 
-The 5 servers expose a unified surface of **65 specialized Model Context Protocol tools**:
+Beyond the 5 Core Pentad MCP servers, PuterVision develops and maintains specialized agent supervision, security scanning, cryptographic, and visual studio tools:
 
-```
-├── state-memory-mcp (15 tools)
-│   ├── manage_nodes          - Create, update, query, and batch-process workflow entities
-│   ├── manage_edges          - Build and query typed DAG dependency and semantic links
-│   ├── manage_sessions       - Multi-turn workflow tracking and agent change attribution
-│   ├── manage_tasks          - Priority queue, runnable task extraction, and blocker resolution
-│   ├── manage_snapshots      - Checkpoint and time-travel rollback with diff inspection
-│   ├── manage_specs          - SDD design contract baseline verification and compliance
-│   ├── manage_database       - SQLite maintenance, diagnostics, and SHA-256 Merkle audits
-│   ├── manage_data           - Interleaved multi-modal trajectory and dataset export
-│   ├── query_graph           - Depth-bounded DAG traversal, shortest paths, and cycles
-│   ├── get_analytics         - Summary statistics, velocity, and blocker analytics
-│   ├── get_events            - Event-sourced changelog and session-level mutation feeds
-│   ├── run_diagnostics       - Graph health validation, orphan detection, and cycle checks
-│   ├── use_blackboard        - Shared key-value state blackboard for multi-agent workflows
-│   ├── link_visual_proof     - Connect workflow tasks to perceptual vision state IDs
-│   └── register_milestone    - Project milestone tracking and release boundary anchors
-│
-├── vision-memory-mcp (15 tools)
-│   ├── analyze_screenshot    - Perceptual hash lookup, vector search, and AX tree grounding
-│   ├── recall_memory         - Semantic text & image similarity search over visual states
-│   ├── record_outcome        - Record UI action transitions and log visual blocker states
-│   ├── get_navigation_paths  - BFS shortest-path graph traversal between visual states
-│   ├── predict_next_action   - Predict optimal UI action and target screen coordinates
-│   ├── compare_states        - Structural perceptual diffing and video keyframe comparison
-│   ├── get_session_context   - Aggregated visual metrics, cache hit ratios, and state timeline
-│   ├── manage_snapshot       - Save, restore, and diff visual memory checkpoints
-│   ├── manage_visual_spec    - Visual SDD contract baseline registration and live verification
-│   ├── manage_video          - Ingest and search video recordings with keyframe extraction
-│   ├── create_evidence_pack  - Cryptographic multimodal evidence packages with SHA-256 hashes
-│   ├── export_trajectories   - Export training datasets in JSON, LLaVA, and Qwen2-VL formats
-│   ├── undo_visual_mutation  - Revert accidental state or transition edge ingestions
-│   ├── forget_state          - Purge sensitive or secret visual states for privacy compliance
-│   └── wait_for_visual_state - Polling barrier waiting until target UI state renders
-│
-├── world-model-mcp (15 tools)
-│   ├── update_entity         - Create/update 3D/2D entities with positions, bounds, and properties
-│   ├── query_entities        - FTS5 keyword, spatial proximity radius, and tag filtering
-│   ├── set_relation          - Record spatial relations (on, inside, next_to, above, contains)
-│   ├── get_spatial_map       - Export JSON, GeoJSON, topological graph, glTF, OBJ, or summary
-│   ├── simulate_movement     - Predict trajectories, test AABB obstacle collisions, plan waypoints
-│   ├── ingest_observation    - Merge vision detections into world model with re-identification
-│   ├── get_expected_view     - Compute entities visible within observer pose and FOV cone
-│   ├── link_to_goal          - Associate spatial entities with state-memory workflow task IDs
-│   ├── record_outcome        - Persist action outcomes and entity mutations in spatial log
-│   ├── manage_spatial_spec   - Spatial SDD physical constraint baseline registration and checks
-│   ├── create_evidence_pack  - Generate cryptographic SHA-256 spatial evidence bundles
-│   ├── use_spatial_blackboard- Shared spatial intent board with spatial mutex locks
-│   ├── manage_snapshot       - Spatial time-travel snapshots, diffs, and state restore
-│   ├── generate_game_inputs  - Generate Playwright automation inputs and screen-to-3D unprojection
-│   └── wait_for_spatial_state- Block until an entity reaches specified spatial conditions
-│
-├── agent-reasoning-mcp (10 tools)
-│   ├── set_goal              - Manage hierarchical goal DAGs and decompose complex intents
-│   ├── evaluate_situation    - Score and rank candidate actions via multi-attribute utility
-│   ├── replan                - Dynamically reconstruct subgoals upon obstacles or failures
-│   ├── assess_risk           - Quantitative threat scoring and risk-adjusted probability calculation
-│   ├── query_knowledge       - Search heuristics, historical decisions, and strategic patterns
-│   ├── set_utility_weights   - Tune agent priorities (aggression, caution, greed, exploration)
-│   ├── get_decision_trace    - Chain-of-thought rationale playback and audit verification
-│   ├── manage_beliefs        - Structured belief state tracking with exponential confidence decay
-│   ├── manage_intentions     - Dispatch actionable directives queue to runtime behavior engine
-│   └── manage_reasoning_db   - Diagnostics, snapshots, diffs, and SHA-256 Merkle audits
-│
-└── behavior-mcp (10 tools)
-    ├── load_behavior         - Inject, initialize, or hot-swap behavior tree execution loops
-    ├── set_parameters        - Dynamically update runtime behavior tree execution variables
-    ├── get_status            - Query active traversal node path, tick count, duration, and errors
-    ├── abort_behavior        - Immediately halt, pause, resume execution, or disengage inputs
-    ├── register_trigger      - Configure priority reactive interrupts with cooldown guards
-    ├── replay_recording      - Deterministic frame sequence capture and adaptive timing replay
-    ├── get_metrics           - Execution telemetry, tick duration histograms, and stuck events
-    ├── manage_behaviors      - Register and version behavior tree definitions with SHA-256 verification
-    ├── manage_blackboard     - Read, write, delete, lease, and list shared behavior variables
-    └── manage_runtime_db     - Database maintenance, diagnostics, and SHA-256 Merkle audits
-```
+| Project | Version | Focus & Purpose | Links |
+| :--- | :---: | :--- | :--- |
+| **`@putervision/harness`** | `0.3.0` | **Agent Supervision, Proxy Gateway & OODA Loop**<br/>Continuous supervisory loop runtime, live dashboard server, capability gating, and fast-classifier multi-model routing. | [GitHub](https://github.com/putervision/harness) • [npm](https://www.npmjs.com/package/@putervision/harness) |
+| **`@putervision/spc`** | `1.5.0` | **System Prompt Compiler & Security Scanner (Space Proof Code)**<br/>AST pattern analyzer enforcing NASA Power of Ten invariants, structural taint tracking, and prompt injection defense. | [GitHub](https://github.com/putervision/spc) • [npm](https://www.npmjs.com/package/@putervision/spc) |
+| **`WebCrypt`** | `0.2.0` | **Zero-Dependency Cryptographic Vault Suite**<br/>AES-256-GCM symmetric encryption, RSA-4096 hybrid public-key encryption, digital signatures, and post-quantum cryptography (ML-KEM / ML-DSA). | [GitHub](https://github.com/LucasArmstrong/WebCrypt) • [npm](https://www.npmjs.com/package/webcrypt) • [Demo](https://putervision.github.io/WebCrypt/) |
+| **`ScreenChunk`** | `0.1.0` | **High-Resolution Visual Partitioning & Spatial Tiling**<br/>Partitioning dense desktop and browser viewports into visual chunks for spatial grounding. | [GitHub](https://github.com/LucasArmstrong/screenchunk) • [Website](https://screenchunk.com) |
+| **`putervision-ui`** | `0.1.0` | **Interactive Visual Memory & Spatial Graph Studio**<br/>Front-end Angular & WebGL workbench for inspecting live perceptual caches, 3D world model entities, and workflow DAGs. | [GitHub](https://github.com/putervision/putervision-ui) |
+| **`BassMusic.ai`** | - | **Algorithmic & Neural Web Audio Music Generator**<br/>Client-side, browser-native algorithmic and neural music generator demonstrating zero-server Web Audio processing. | [Website](https://bassmusic.ai) |
 
 ---
 
-## 📦 Additional Projects & Supporting Libraries
+## 📚 Modular Documentation
 
-Beyond the Core Pentad MCP servers, PuterVision develops and maintains production-grade security, cryptographic, static analysis, and utility libraries:
+To keep this overview concise and readable, deep architectural and reference specifications have been organized into specialized sub-documents:
 
-| Project | Description | Links |
+| Document | Topic & Focus | Key Highlights |
 | :--- | :--- | :--- |
-| **`spc`** *(Space Proof Code)* | High-performance, zero-dependency static analysis tool enforcing NASA Power of Ten safety-critical coding standards and security invariants across 20+ programming languages. | [GitHub](https://github.com/putervision/spc) • [npm](https://www.npmjs.com/package/@putervision/spc) |
-| **`WebCrypt`** | Zero-dependency cryptographic vault suite for browser & Node.js Web Crypto API. Powers AES-256-GCM symmetric encryption, RSA-4096 hybrid public-key encryption, ECDH, digital signatures, and post-quantum security. | [GitHub](https://github.com/putervision/WebCrypt) • [npm](https://www.npmjs.com/package/webcrypt) • [Demo](https://putervision.github.io/WebCrypt/) |
-| **`ScreenChunk`** | High-resolution screen capture, spatial chunking, and visual layout partitioning engine for dense browser and desktop interfaces. | [Website](https://screenchunk.com) |
-| **`BassMusic.ai`** | Client-side, browser-native algorithmic and neural music generator demonstrating zero-server Web Audio processing. | [Website](https://bassmusic.ai) |
+| [**🛠️ 68-Tool Reference (`TOOLS.md`)**](https://github.com/putervision/.github/blob/main/profile/TOOLS.md) | **Complete MCP Tool Reference** | Exhaustive catalog of all 68 Model Context Protocol tools, action modes, input parameters, and cross-server synergy links. |
+| [**📐 Architecture Deep Dive (`ARCHITECTURE.md`)**](https://github.com/putervision/.github/blob/main/profile/ARCHITECTURE.md) | **System 1 & Jev-Style Fast Path** | Detailed breakdown of the Dual-Process architecture, StatePack Merkle specification (§10.1), L1-L4 decision tiers, HMAC intention tokens, and ~60Hz `semantic_check` invariants. |
+| [**🚀 Getting Started & Setup (`GETTING_STARTED.md`)**](https://github.com/putervision/.github/blob/main/profile/GETTING_STARTED.md) | **Installation & Client Configuration** | Step-by-step setup guides and ready-to-use JSON configuration templates for Claude Code, Cursor, Windsurf, VS Code, and Google Antigravity. |
 
 ---
 
-## 🛡️ Architectural Pillars
+## 🛡️ Core Architectural Pillars
 
 - 🔒 **100% Local-First & Zero Telemetry**: All tasks, decisions, visual caches, 3D entity models, and reasoning beliefs reside strictly in local SQLite and LanceDB files on your machine. Zero cloud dependencies, zero external analytics collection, and zero data leakage.
-- ⚡ **Sub-Millisecond Retrieval & Execution**: Eliminates massive context window token burn. High-frequency indexing, perceptual hashing, and local graph traversal deliver deterministic responses in `<2ms`.
-- 🛡️ **Fail-Closed Safety & Tamper-Proof Audit**: Engineered with 5-layer safety stacks, watchdog circuit breakers, and SHA-256 Merkle audit chains for reproducible, tamper-evident agent trajectories.
-- 🧪 **Exhaustive Automated Verification**: Backed by **1,253 automated unit, integration, and stress tests** across 268 test suites with zero version drift verified across all configurations, manifests, docs, and releases.
+- ⚡ **Sub-Millisecond Retrieval & Execution**: Eliminates massive context window token burn. High-frequency indexing, perceptual hashing, and local graph traversal deliver deterministic responses in `<1ms`.
+- 🛡️ **Fail-Closed Safety & Cryptographic Gating**: Engineered with 5-layer safety stacks, watchdog circuit breakers, constant-time HMAC-SHA256 intention dispatch token verification, and SHA-256 Merkle audit chains for reproducible, tamper-evident agent trajectories.
+- 🧪 **Exhaustive Automated Verification**: Backed by **1,701 automated unit, integration, and live synergy tests** (100% pass rate across 356 test files) with zero version drift verified across all packages, manifests, and documentation.
 - 🔌 **Universal MCP Compatibility**: Natively supported by **Claude Code**, **Cursor**, **Gemini CLI / Antigravity**, **Windsurf**, **VS Code**, and any Model Context Protocol compliant client.
 
 ---
 
-## ⚡ Quickstart: Adding the Pentad to Your AI Assistant
+## ⚡ Quickstart
 
-Add the PuterVision Pentad servers to your favorite MCP-enabled editor or agent environment:
+### 1. Instant Setup (No Installation Required)
 
-### Claude Code (`claude.json`) / Cursor (`.cursor/mcp.json`) / Windsurf (`mcp_config.json`)
+Add the Pentad servers directly to your AI assistant configuration (`claude.json`, `.cursor/mcp.json`, `mcp_config.json`):
 
 ```json
 {
@@ -200,34 +152,43 @@ Add the PuterVision Pentad servers to your favorite MCP-enabled editor or agent 
     },
     "agent-reasoning-mcp": {
       "command": "npx",
-      "args": ["-y", "@putervision/agent-reasoning-mcp"]
+      "args": ["-y", "@putervision/agent-reasoning-mcp"],
+      "env": {
+        "PENTAD_HMAC_SECRET": "your-secure-32-byte-secret-key-here"
+      }
     },
     "behavior-mcp": {
       "command": "npx",
-      "args": ["-y", "@putervision/behavior-mcp"]
+      "args": ["-y", "@putervision/behavior-mcp"],
+      "env": {
+        "PENTAD_HMAC_SECRET": "your-secure-32-byte-secret-key-here"
+      }
     }
   }
 }
 ```
 
-### Alternative: Global CLI Installation
+### 2. Local CLI Installation & Workspace Initialization
+
+Install the servers globally for direct CLI commands and local background daemons:
 
 ```bash
-# Install all 5 Pentad servers globally
 npm install -g \
   @putervision/state-memory-mcp \
   @putervision/vision-memory-mcp \
   @putervision/world-model-mcp \
   @putervision/agent-reasoning-mcp \
-  @putervision/behavior-mcp
-
-# Initialize project databases in your working directory
-state-memory-mcp init
-vision-memory-mcp init
-world-model-mcp init
-agent-reasoning-mcp init
-behavior-mcp init
+  @putervision/behavior-mcp \
+  @putervision/harness
 ```
+
+Initialize your workspace databases and scaffold IDE agent instruction rules:
+
+```bash
+state-memory-mcp init && vision-memory-mcp init && world-model-mcp init && agent-reasoning-mcp init && behavior-mcp init
+```
+
+> For full client configuration templates (Cursor, Claude Code, Windsurf, Antigravity, VS Code), environment variables, and Docker setups, see the [**Getting Started Guide (`GETTING_STARTED.md`)**](https://github.com/putervision/.github/blob/main/profile/GETTING_STARTED.md).
 
 ---
 
@@ -237,4 +198,3 @@ behavior-mcp init
 - 📦 **npm Organization**: [@putervision](https://www.npmjs.com/org/putervision)
 - 🐙 **GitHub Organization**: [github.com/putervision](https://github.com/putervision)
 - 📜 **License**: MIT Open Source
-
