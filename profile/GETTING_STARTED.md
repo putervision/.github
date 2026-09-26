@@ -199,4 +199,4 @@ agent-reasoning-mcp view
 
 - [**PuterVision Organization README**](https://github.com/putervision/.github/blob/main/profile/README.md)
 - [**68-Tool Model Context Protocol Reference (`TOOLS.md`)**](https://github.com/putervision/.github/blob/main/profile/TOOLS.md)
-- [**System One & Jev-Style Architecture Deep Dive (`ARCHITECTURE.md`)**](https://github.com/putervision/.github/blob/main/profile/ARCHITECTURE.md)
+- [**System One Architecture Deep Dive (`ARCHITECTURE.md`)**](https://github.com/putervision/.github/blob/main/profile/ARCHITECTURE.md)

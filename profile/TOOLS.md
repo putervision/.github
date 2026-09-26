@@ -130,5 +130,5 @@ This document provides a comprehensive operational catalog of the **68 specializ
 ## 🔗 Related Documentation
 
 - [**PuterVision Organization README**](https://github.com/putervision/.github/blob/main/profile/README.md)
-- [**System One & Jev-Style Architecture Deep Dive (`ARCHITECTURE.md`)**](https://github.com/putervision/.github/blob/main/profile/ARCHITECTURE.md)
+- [**System One Architecture Deep Dive (`ARCHITECTURE.md`)**](https://github.com/putervision/.github/blob/main/profile/ARCHITECTURE.md)
 - [**Getting Started & Client Configuration Guide (`GETTING_STARTED.md`)**](https://github.com/putervision/.github/blob/main/profile/GETTING_STARTED.md)

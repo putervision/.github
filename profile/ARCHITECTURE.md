@@ -1,10 +1,10 @@
-# 📐 PuterVision Cognitive Pentad & Jev-Style System 1 Architecture
+# 📐 PuterVision Cognitive Pentad & System 1 Architecture
 
 > **A Dual-Process Cognitive Architecture for Autonomous Agents**: Decoupling slow, deliberative BDI reasoning (System 2) from sub-millisecond, deterministic, non-generative decision and execution loops (System 1).
 
 ---
 
-## 1. The Core Problem & The Jev-Style Paradigm
+## 1. The Core Problem & Dual-Process Architecture
 
 Modern agent frameworks face a fundamental dilemma when deploying LLMs to interactive real-time environments (e.g. browser automation, game playing, terminal coding, continuous robotics):
 
@@ -25,9 +25,11 @@ Modern agent frameworks face a fundamental dilemma when deploying LLMs to intera
 +-------------------------------------------------------------------------+
 ```
 
-### Why Jev-Style System 1?
+### Why System 1?
 
-Inspired by cognitive dual-process theory and agent architectures pioneered by community innovators such as **Jev** (who advocated decoupling fast reactive classification and non-generative action gating from heavyweight frontier model calls), PuterVision introduces a formalized **Jev-Style "System One" Fast Decision Layer**:
+Inspired by cognitive dual-process theory and agent architectures—specifically the typed System 1 pattern pioneered by TypeSafe's **Jev** (evaluating typed `Choice`, `Score`, and `Noul` primitives over compact state without token generation)—PuterVision introduces a formalized **"System One" Fast Decision Layer**.
+
+Where TypeSafe's Jev operates as a hosted neural decision model (~70–500ms), PuterVision implements that same architectural shape locally via in-memory LRU caches, deterministic heuristics, and vector centroid matching for sub-millisecond execution (<1ms) rather than calling the hosted Jev API:
 
 1. **System 1 (Fast, Intuitive, Non-Generative)**:
    - Operates in **$<1\text{ms}$** using local in-memory LRU caches, heuristic decision trees, and vector centroid matching.
@@ -50,7 +52,7 @@ Inspired by cognitive dual-process theory and agent architectures pioneered by c
                                    Long-Term Intent
                                           v
 +------------------+       +------------------------------------+       +-------------------+
-|  MEMORY SLICES   | ----> |     SYSTEM 1 (Jev-Style Fast Path) | ----> |   ~60Hz RUNTIME   |
+|  MEMORY SLICES   | ----> |     SYSTEM 1 (Fast Path)           | ----> |   ~60Hz RUNTIME   |
 | - Compact Visual |       |   Sub-Millisecond Non-Generative   |       | Behavior Trees    |
 | - Nearest Spatial|       |   - classify / ask_noul / choice   |       | - semantic_check  |
 | - Compact Task   |       |   - HMAC Dispatch Token Gate       |       | - Reactive Trigger|
