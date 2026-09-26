@@ -127,7 +127,7 @@ flowchart TD
     Abstain --> L2["L2 Cosine Feature Matcher<br/>Cosine similarity against local centroids (<2ms)"]
     L2 --> L2Check{"Similarity > 0.75?"}
     L2Check -- Yes --> ReturnL2["Return L2 Result (tier: 'L2')"]
-    L2Check -- No --> L3["L3 Local Onnx/Quantized Model<br/>(or L4 Remote via Harness if enabled)"]
+    L2Check -- No --> L3["L3 Local Onnx/Quantized Model<br/>(or L4 Remote Fallback if enabled)"]
 ```
 
 ### Strict L1 Abstain Invariant

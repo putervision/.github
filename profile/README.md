@@ -6,7 +6,7 @@
 [![Protocol](https://img.shields.io/badge/MCP-Model%20Context%20Protocol-6366f1.svg?style=flat-square)](https://modelcontextprotocol.io/)
 [![Architecture](https://img.shields.io/badge/Architecture-Cognitive%20Pentad%20%2B%20System%201-10b981.svg?style=flat-square)](https://github.com/putervision/.github/blob/main/profile/ARCHITECTURE.md)
 [![Privacy](https://img.shields.io/badge/Privacy-100%25%20Local--First-f59e0b.svg?style=flat-square)](https://putervision.com)
-[![Tests](https://img.shields.io/badge/Tests-1%2C701%20Passing%20(100%25)-brightgreen.svg?style=flat-square)](https://github.com/putervision)
+[![Tests](https://img.shields.io/badge/Tests-1%2C406%20Passing%20(100%25)-brightgreen.svg?style=flat-square)](https://github.com/putervision)
 [![Sync](https://img.shields.io/badge/Pentad%20Sync-Zero%20Drift%20Verified-blue.svg?style=flat-square)](https://github.com/putervision)
 
 ---
@@ -88,17 +88,14 @@ The Pentad exposes a unified surface of **68 specialized Model Context Protocol 
 | **`agent-reasoning-mcp`** | `0.3.0` | [![npm](https://img.shields.io/npm/v/@putervision/agent-reasoning-mcp.svg?style=flat-square)](https://www.npmjs.com/package/@putervision/agent-reasoning-mcp) | **Strategic BDI Engine & System 1 Fast Decision Layer (15 Tools)**<br/>Formal Belief-Desire-Intention cognitive deliberation framework + Jev-style typed non-generative System 1 fast path (`classify`, `ask_noul`, `ask_choice`, `ask_score`, `gate_intention`). Decomposes complex objectives into dependency DAGs, computes multi-objective expected utility scores (\(E[U] = \sum w_i u_i\)), assesses quantitative risk, decays belief confidences, signs HMAC intention dispatch tokens, and triggers adaptive replanning. | [GitHub](https://github.com/putervision/agent-reasoning-mcp) • [Website](https://agentreasoningmcp.com) |
 | **`behavior-mcp`** | `0.3.0` | [![npm](https://img.shields.io/npm/v/@putervision/behavior-mcp.svg?style=flat-square)](https://www.npmjs.com/package/@putervision/behavior-mcp) | **~60Hz Behavior Tree Execution Engine (10 Tools)**<br/>High-frequency in-browser behavior tree tactical runtime. Delivers deterministic execution with priority reactive triggers, cooldown guards, synchronous `semantic_check` blackboard condition nodes, HMAC intention dispatch token verification, a 5-layer fail-closed safety stack, telemetry capture, deterministic action sequence replay, stuck recovery, and SHA-256 Merkle audits. | [GitHub](https://github.com/putervision/behavior-mcp) • [Website](https://behaviormcp.com) |
 
-*The cluster is supervised by [**`@putervision/harness`**](https://github.com/putervision/harness) (`v0.3.0`), providing continuous loop supervision, dashboard monitoring, and fast-classifier model routing.*
-
 ---
 
 ## 📦 Ecosystem & Supporting Projects
 
-Beyond the 5 Core Pentad MCP servers, PuterVision develops and maintains specialized agent supervision, security scanning, cryptographic, and visual studio tools:
+Beyond the 5 Core Pentad MCP servers, PuterVision develops and maintains specialized security scanning, cryptographic, visual studio, and web tools:
 
 | Project | Version | Focus & Purpose | Links |
 | :--- | :---: | :--- | :--- |
-| **`@putervision/harness`** | `0.3.0` | **Agent Supervision, Proxy Gateway & OODA Loop**<br/>Continuous supervisory loop runtime, live dashboard server, capability gating, and fast-classifier multi-model routing. | [GitHub](https://github.com/putervision/harness) • [npm](https://www.npmjs.com/package/@putervision/harness) |
 | **`@putervision/spc`** | `1.5.0` | **System Prompt Compiler & Security Scanner (Space Proof Code)**<br/>AST pattern analyzer enforcing NASA Power of Ten invariants, structural taint tracking, and prompt injection defense. | [GitHub](https://github.com/putervision/spc) • [npm](https://www.npmjs.com/package/@putervision/spc) |
 | **`WebCrypt`** | `0.2.0` | **Zero-Dependency Cryptographic Vault Suite**<br/>AES-256-GCM symmetric encryption, RSA-4096 hybrid public-key encryption, digital signatures, and post-quantum cryptography (ML-KEM / ML-DSA). | [GitHub](https://github.com/LucasArmstrong/WebCrypt) • [npm](https://www.npmjs.com/package/webcrypt) • [Demo](https://putervision.github.io/WebCrypt/) |
 | **`ScreenChunk`** | `0.1.0` | **High-Resolution Visual Partitioning & Spatial Tiling**<br/>Partitioning dense desktop and browser viewports into visual chunks for spatial grounding. | [GitHub](https://github.com/LucasArmstrong/screenchunk) • [Website](https://screenchunk.com) |
@@ -124,7 +121,7 @@ To keep this overview concise and readable, deep architectural and reference spe
 - 🔒 **100% Local-First & Zero Telemetry**: All tasks, decisions, visual caches, 3D entity models, and reasoning beliefs reside strictly in local SQLite and LanceDB files on your machine. Zero cloud dependencies, zero external analytics collection, and zero data leakage.
 - ⚡ **Sub-Millisecond Retrieval & Execution**: Eliminates massive context window token burn. High-frequency indexing, perceptual hashing, and local graph traversal deliver deterministic responses in `<1ms`.
 - 🛡️ **Fail-Closed Safety & Cryptographic Gating**: Engineered with 5-layer safety stacks, watchdog circuit breakers, constant-time HMAC-SHA256 intention dispatch token verification, and SHA-256 Merkle audit chains for reproducible, tamper-evident agent trajectories.
-- 🧪 **Exhaustive Automated Verification**: Backed by **1,701 automated unit, integration, and live synergy tests** (100% pass rate across 356 test files) with zero version drift verified across all packages, manifests, and documentation.
+- 🧪 **Exhaustive Automated Verification**: Backed by **1,406 automated unit, integration, and live synergy tests** (100% pass rate across 294 test files) with zero version drift verified across all packages, manifests, and documentation.
 - 🔌 **Universal MCP Compatibility**: Natively supported by **Claude Code**, **Cursor**, **Gemini CLI / Antigravity**, **Windsurf**, **VS Code**, and any Model Context Protocol compliant client.
 
 ---
@@ -178,8 +175,7 @@ npm install -g \
   @putervision/vision-memory-mcp \
   @putervision/world-model-mcp \
   @putervision/agent-reasoning-mcp \
-  @putervision/behavior-mcp \
-  @putervision/harness
+  @putervision/behavior-mcp
 ```
 
 Initialize your workspace databases and scaffold IDE agent instruction rules:
