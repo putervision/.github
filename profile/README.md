@@ -92,20 +92,6 @@ The Pentad exposes a unified surface of **68 specialized Model Context Protocol 
 
 ---
 
-## 📦 Ecosystem & Supporting Projects
-
-Beyond the 5 Core Pentad MCP servers, PuterVision develops and maintains specialized security scanning, cryptographic, visual studio, and web tools:
-
-| Project | Version | Focus & Purpose | Links |
-| :--- | :---: | :--- | :--- |
-| **`@putervision/spc`** | `1.5.0` | **System Prompt Compiler & Security Scanner (Space Proof Code)**<br/>AST pattern analyzer enforcing NASA Power of Ten invariants, structural taint tracking, and prompt injection defense. | [GitHub](https://github.com/putervision/spc) • [npm](https://www.npmjs.com/package/@putervision/spc) |
-| **`WebCrypt`** | `0.2.0` | **Zero-Dependency Cryptographic Vault Suite**<br/>AES-256-GCM symmetric encryption, RSA-4096 hybrid public-key encryption, digital signatures, and post-quantum cryptography (ML-KEM / ML-DSA). | [GitHub](https://github.com/LucasArmstrong/WebCrypt) • [npm](https://www.npmjs.com/package/webcrypt) • [Demo](https://putervision.github.io/WebCrypt/) |
-| **`ScreenChunk`** | `0.1.0` | **High-Resolution Visual Partitioning & Spatial Tiling**<br/>Partitioning dense desktop and browser viewports into visual chunks for spatial grounding. | [Website](https://screenchunk.com) |
-| **`putervision-ui`** | `0.1.0` | **Interactive Visual Memory & Spatial Graph Studio**<br/>Front-end Angular & WebGL workbench for inspecting live perceptual caches, 3D world model entities, and workflow DAGs. | [GitHub](https://github.com/putervision/putervision-ui) |
-| **`BassMusic.ai`** | - | **Algorithmic & Neural Web Audio Music Generator**<br/>Client-side, browser-native algorithmic and neural music generator demonstrating zero-server Web Audio processing. | [Website](https://bassmusic.ai) |
-
----
-
 ## 📚 Modular Documentation
 
 To keep this overview concise and readable, deep architectural and reference specifications have been organized into specialized sub-documents:
