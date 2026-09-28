@@ -17,6 +17,18 @@ npm install -g \
   @putervision/behavior-mcp
 ```
 
+### Official Model Context Protocol Registry
+
+All 5 servers are officially verified, published, and indexed on the [Model Context Protocol Registry](https://registry.modelcontextprotocol.io):
+
+| Server | Registry Identifier | Latest Version |
+| :--- | :--- | :---: |
+| `state-memory-mcp` | `io.github.putervision/state-memory-mcp` | `1.3.1` |
+| `vision-memory-mcp` | `io.github.putervision/vision-memory-mcp` | `1.3.1` |
+| `world-model-mcp` | `io.github.putervision/world-model-mcp` | `0.5.1` |
+| `agent-reasoning-mcp` | `io.github.putervision/agent-reasoning-mcp` | `0.3.1` |
+| `behavior-mcp` | `io.github.putervision/behavior-mcp` | `0.3.1` |
+
 ### Initializing a Project
 
 From your target project repository root, run the initialization commands to create local SQLite databases in WAL mode and scaffold IDE instruction contracts:

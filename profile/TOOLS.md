@@ -1,6 +1,6 @@
 # 🛠️ PuterVision Pentad: 68-Tool Model Context Protocol Reference
 
-This document provides a comprehensive operational catalog of the **68 specialized Model Context Protocol (MCP) tools** provided by the PuterVision Cognitive Pentad.
+This document provides a comprehensive operational catalog of the **68 specialized Model Context Protocol (MCP) tools** provided by the PuterVision Cognitive Pentad. All tool definitions strictly adhere to **Glama Tool Description Quality Score (TDQS)** standards with explicit action enums in opening sentences, unambiguous routing guidance ("Use X instead of Y when Z"), structured `Returns:` response schemas, and calibrated `idempotentHint` / `destructiveHint` annotations.
 
 ---
 
@@ -16,7 +16,7 @@ This document provides a comprehensive operational catalog of the **68 specializ
 
 ## 1. `state-memory-mcp` (13 Tools)
 
-**Package**: `@putervision/state-memory-mcp` | **Version**: `1.3.0` | **Focus**: Persistent Workflow State Memory
+**Package**: `@putervision/state-memory-mcp` | **Version**: `1.3.1` | **Registry**: `io.github.putervision/state-memory-mcp` | **Focus**: Persistent Workflow State Memory
 
 | Tool | Action Modes | Description |
 | :--- | :--- | :--- |
@@ -38,7 +38,7 @@ This document provides a comprehensive operational catalog of the **68 specializ
 
 ## 2. `vision-memory-mcp` (15 Tools)
 
-**Package**: `@putervision/vision-memory-mcp` | **Version**: `1.3.0` | **Focus**: Perceptual Visual Memory & AX Grounding
+**Package**: `@putervision/vision-memory-mcp` | **Version**: `1.3.1` | **Registry**: `io.github.putervision/vision-memory-mcp` | **Focus**: Perceptual Visual Memory & AX Grounding
 
 | Tool | Action Modes | Description |
 | :--- | :--- | :--- |
@@ -62,7 +62,7 @@ This document provides a comprehensive operational catalog of the **68 specializ
 
 ## 3. `world-model-mcp` (15 Tools)
 
-**Package**: `@putervision/world-model-mcp` | **Version**: `0.5.0` | **Focus**: 3D/2D Spatial Memory & Object Permanence
+**Package**: `@putervision/world-model-mcp` | **Version**: `0.5.1` | **Registry**: `io.github.putervision/world-model-mcp` | **Focus**: 3D/2D Spatial Memory & Object Permanence
 
 | Tool | Action Modes | Description |
 | :--- | :--- | :--- |
@@ -86,7 +86,7 @@ This document provides a comprehensive operational catalog of the **68 specializ
 
 ## 4. `agent-reasoning-mcp` (15 Tools)
 
-**Package**: `@putervision/agent-reasoning-mcp` | **Version**: `0.3.0` | **Focus**: Strategic BDI Cognition & System 1 Fast Decision Layer
+**Package**: `@putervision/agent-reasoning-mcp` | **Version**: `0.3.1` | **Registry**: `io.github.putervision/agent-reasoning-mcp` | **Focus**: Strategic BDI Cognition & System 1 Fast Decision Layer
 
 | Tool | Subsystem | Description |
 | :--- | :--- | :--- |
@@ -110,7 +110,7 @@ This document provides a comprehensive operational catalog of the **68 specializ
 
 ## 5. `behavior-mcp` (10 Tools)
 
-**Package**: `@putervision/behavior-mcp` | **Version**: `0.3.0` | **Focus**: ~60Hz Behavior Tree Execution Engine
+**Package**: `@putervision/behavior-mcp` | **Version**: `0.3.1` | **Registry**: `io.github.putervision/behavior-mcp` | **Focus**: ~60Hz Behavior Tree Execution Engine
 
 | Tool | Action Modes | Description |
 | :--- | :--- | :--- |
