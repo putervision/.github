@@ -23,11 +23,11 @@ All 5 servers are officially verified, published, and indexed on the [Model Cont
 
 | Server | Registry Identifier | Latest Version |
 | :--- | :--- | :---: |
-| `state-memory-mcp` | `io.github.putervision/state-memory-mcp` | `1.3.1` |
-| `vision-memory-mcp` | `io.github.putervision/vision-memory-mcp` | `1.3.1` |
-| `world-model-mcp` | `io.github.putervision/world-model-mcp` | `0.5.1` |
-| `agent-reasoning-mcp` | `io.github.putervision/agent-reasoning-mcp` | `0.3.1` |
-| `behavior-mcp` | `io.github.putervision/behavior-mcp` | `0.3.1` |
+| `state-memory-mcp` | `io.github.putervision/state-memory-mcp` | `1.4.0` |
+| `vision-memory-mcp` | `io.github.putervision/vision-memory-mcp` | `1.4.0` |
+| `world-model-mcp` | `io.github.putervision/world-model-mcp` | `0.6.0` |
+| `agent-reasoning-mcp` | `io.github.putervision/agent-reasoning-mcp` | `0.4.0` |
+| `behavior-mcp` | `io.github.putervision/behavior-mcp` | `0.4.0` |
 
 ### Initializing a Project
 
