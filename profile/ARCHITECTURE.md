@@ -68,12 +68,12 @@ Rather than feeding raw megabyte payloads into decision engines, each Pentad mem
 ### A. Compact Memory Slices
 
 1. **`vision-memory-mcp` $\to$ Visual Slice ($<1\text{KB}$)**:
-   - Contains: `state_id`, layout perceptual SHA-256 hash, truncated text description summary ($\le 120$ chars), interactive AX element count, and vector embedding reference IDs.
+   - Contains: `state_id`, layout perceptual SHA-256 hash, truncated text description summary ($\le 120$ chars), interactive AX element count, 3D spatial grounding coordinates (`spatial_x, spatial_y, spatial_z`), oriented 3D bounding boxes, affordance bitmask tagging (`AFFORDANCE_CLICKABLE`, `AFFORDANCE_INPUT`, etc.), and vector embedding reference IDs.
    - Eliminates raw image base64 transmissions entirely.
 2. **`world-model-mcp` $\to$ Spatial Slice ($<2\text{KB}$)**:
-   - Contains: Observer coordinates $[x, y, z]$, relative heading, $K \le 16$ nearest entities sorted by Euclidean distance with relative bearings $[-180^\circ, 180^\circ]$, nearest obstacle distance, and deterministic `spatial_hash`.
+   - Contains: Observer coordinates $[x, y, z]$, dynamic 3D velocity vectors $[vx, vy, vz]$, relative heading, $K \le 16$ nearest entities sorted by Euclidean distance with relative bearings $[-180^\circ, 180^\circ]$, compact affordance bitmasks, nearest obstacle distance, physics-aware collision rollout bounds, and deterministic `spatial_hash`.
 3. **`state-memory-mcp` $\to$ Task Slice ($<1\text{KB}$)**:
-   - Contains: Active goal ID and title, top active blocker summaries, and recent decision IDs.
+   - Contains: Active goal ID and title, top active blocker summaries, linked `spatial_entity` nodes with typed spatial edges (`occupies_region`, `spatial_target_of`, `affords`), and recent decision IDs.
 
 ### B. Canonical `StatePack` Contract (§10.1)
 
@@ -157,12 +157,18 @@ Before any intention directive is dispatched to the runtime behavior engine, it 
 Browser automation and gaming require deterministic $\sim 16.6\text{ms}$ tick loops. To prevent loop stalls:
 
 - **No Async MCP Calls in Behavior Loops**: Behavior nodes never make network or asynchronous tool calls during a tick.
+- **Blackboard Slice Projections (`manage_blackboard(action: 'ingest_slice')`)**:
+  - Ingests pre-computed spatial and visual compact slices directly into blackboard state with configurable TTL staleness guards, exposing entities and affordance flags to running trees with zero serialization overhead.
+- **Typed Spatial Condition Nodes**:
+  - Evaluates deterministic geometric conditions (`spatial_distance`, `spatial_affordance`) synchronously during ticks against ingested spatial entities.
 - **Synchronous `semantic_check` Condition**:
   - Checks pre-populated blackboard variables (`semantic_decision_<key>`).
   - Enforces a **5000ms freshness TTL**: if the cached decision is older than 5 seconds, the condition evaluates to `false` (fails closed).
 - **Asynchronous Companion Action `request_semantic_evaluation`**:
   - Flags an off-tick request in the blackboard.
   - Returns status `RUNNING` until the background fast-path or System 2 updates the decision.
+- **60Hz Non-Blocking Outcome Spooling (`SpoolEngine`)**:
+  - High-frequency tick outcomes, telemetry, and action transitions are spooled in-memory via lock-free ring buffers and flushed to SQLite asynchronously off-tick via `manage_runtime_db(action: 'drain_spool')`, maintaining deterministic $<16.6\text{ms}$ loop timing without SQLite WAL contention.
 
 ---
 
@@ -172,7 +178,7 @@ High-frequency decision engines can generate tens of thousands of decisions per 
 
 - **Significance Threshold ($\ge 0.70$)**: Only decisions with high strategic weight, unexpected state transitions, or holding signed dispatch tokens are written as full property graph nodes with `decided_in` edges.
 - **Sub-Threshold Logging ($< 0.70$)**: High-confidence routine cache hits are recorded strictly in the append-only SQLite event ledger for auditability without graph clutter.
-- **Interleaved Multimodal Trajectories**: `manage_data(action: "export_joint_trajectories")` correlates workflow steps, visual layout IDs, and `pack_hash` values for reproducible agent analysis and fine-tuning dataset export.
+- **Interleaved Multimodal Trajectories**: `manage_data(action: "export_joint_trajectories")` correlates workflow steps, visual layout IDs, 3D spatial entity coordinates, affordance bitmasks, and `pack_hash` values for reproducible agent analysis and fine-tuning dataset export across the entire Pentad.
 
 ---
 

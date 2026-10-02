@@ -20,14 +20,14 @@ This document provides a comprehensive operational catalog of the **68 specializ
 
 | Tool | Action Modes | Description |
 | :--- | :--- | :--- |
-| `manage_nodes` | `create`, `update`, `get`, `delete`, `batch_create`, `batch_update`, `add_note` | CRUD operations for workflow entities: tasks, decisions, artifacts, plans, milestones, blockers, observations, requirements, and `spatial_entity` nodes. |
-| `manage_edges` | `create`, `delete`, `query`, `link_visual`, `link_spatial` | Builds and queries directed typed dependency graphs (`depends_on`, `blocks`, `produces`, `references`, `renders_state`, `occupies_region`, `affords`). |
+| `manage_nodes` | `create`, `update`, `get`, `delete`, `batch_create`, `batch_update`, `add_note` | CRUD operations for workflow entities: tasks, decisions, artifacts, plans, milestones, blockers, observations, requirements, and `spatial_entity` nodes with affordance bitmasks. |
+| `manage_edges` | `create`, `delete`, `query`, `link_visual`, `link_spatial` | Builds and queries directed typed dependency graphs (`depends_on`, `blocks`, `produces`, `references`, `renders_state`, `occupies_region`, `affords`, `spatial_target_of`). |
 | `manage_sessions` | `start`, `end`, `list`, `get` | Multi-turn agent attribution, tracking mutations, active task scopes, and session lifecycle boundaries. |
 | `manage_tasks` | `next`, `complete`, `block`, `unblock`, `find_blockers`, `list` | Priority queue execution, topological runnable task extraction, and blocker resolution DAG traversals. |
 | `manage_snapshots` | `save`, `restore`, `diff`, `list`, `undo` | Transactional workspace state checkpoints, rollbacks, and structural graph diffing. |
 | `manage_specs` | `register`, `verify`, `list`, `get` | State-driven design (SDD) contract baseline registration and automated compliance verification. |
 | `manage_database` | `stats`, `audit`, `doctor`, `optimize` | SQLite database maintenance, integrity checks, index tuning, and cryptographic SHA-256 Merkle audits. |
-| `manage_data` | `export`, `import`, `export_joint_trajectories`, `export_synergy_metrics` | Interleaved multimodal trajectory extraction connecting workflow steps to visual states, spatial entities, and fast decision hashes. |
+| `manage_data` | `export`, `import`, `export_joint_trajectories`, `export_synergy_metrics` | Interleaved multimodal trajectory extraction connecting workflow steps to visual states, 3D spatial entities, affordance bitmasks, and fast decision hashes. |
 | `query_graph` | `trace`, `ancestors`, `descendants`, `cycles`, `compact_slice` | Depth-bounded DAG traversal, cycle anomaly detection, and compact `TaskSlice` generation for System 1. |
 | `get_analytics` | `summary`, `velocity`, `blockers`, `burndown` | Project health metrics, completion velocity, node distributions, and critical blocker path analysis. |
 | `get_events` | `feed`, `changelog`, `replay` | Append-only event-sourced audit log querying with session and timestamp filtering. |
@@ -42,7 +42,7 @@ This document provides a comprehensive operational catalog of the **68 specializ
 
 | Tool | Action Modes | Description |
 | :--- | :--- | :--- |
-| `analyze_screenshot` | Single or batch ingestion | Computes perceptual hashes (dHash/pHash), LanceDB vector embeddings, AX tree element grounding, and 3D spatial coordinate projection. |
+| `analyze_screenshot` | Single or batch ingestion | Computes perceptual hashes (dHash/pHash), LanceDB vector embeddings, AX tree element grounding, 3D spatial coordinate projection (`spatial_x, spatial_y, spatial_z`), and affordance bitmask tagging. |
 | `recall_memory` | Text query or image similarity | Searches historical visual states via semantic text descriptions or base64 image similarity. |
 | `record_outcome` | `transition`, `blocker`, `mutation` | Tracks UI state transitions triggered by actions, constructing empirical navigation graphs. |
 | `get_navigation_paths` | BFS path query | Finds deterministic shortest-path UI action sequences to navigate from state $A$ to target state $B$. |
@@ -69,7 +69,7 @@ This document provides a comprehensive operational catalog of the **68 specializ
 | `update_entity` | `create`, `update`, `patch` | Creates/updates 3D/2D entities with coordinates, dynamic velocity vectors (`vx, vy, vz`), AABB bounding boxes, affordance bitmasks, confidence, and custom properties. |
 | `query_entities` | FTS5, proximity, tags | Spatial proximity queries (radius search), keyword filtering, status filters, and entity history lookup. |
 | `set_relation` | `link`, `update`, `remove` | Registers spatial and topological relationships (`on`, `inside`, `next_to`, `above`, `near`, `contains`). |
-| `get_spatial_map` | `json`, `geojson`, `gltf`, `obj`, `summary`, `compact_slice` | Exports structured 3D spatial models, topological graphs, glTF scenes, or $K \le 16$ nearest entity slices. |
+| `get_spatial_map` | `json`, `geojson`, `gltf`, `obj`, `summary`, `compact_slice`, `slice` | Exports structured 3D spatial models, topological graphs, glTF scenes, compact spatial slices (`format: 'slice'`), or $K \le 16$ nearest entity slices. |
 | `simulate_movement` | `predict`, `navigate`, `waypoints` | Tests AABB obstacle collisions, simulates velocity/displacement paths with dynamic momentum extrapolation, and computes waypoint vectors. |
 | `ingest_observation` | Perception merge | Reconciles vision detections into the world model; re-identifies persistent entities and updates poses. |
 | `get_expected_view` | Frustum cone calculation | Calculates which entities are visible from an observer position, orientation angles, and FOV cone. |
@@ -91,13 +91,13 @@ This document provides a comprehensive operational catalog of the **68 specializ
 | Tool | Subsystem | Description |
 | :--- | :--- | :--- |
 | `set_goal` | Strategic (System 2) | Hierarchical goal DAG management, objective decomposition into subgoals, and priority assignment. |
-| `evaluate_situation` | Strategic (System 2) | Multi-attribute expected utility evaluation (\(E[U] = \sum w_i u_i\)) with 3D spatial entity density and hazard modulation. |
+| `evaluate_situation` | Strategic (System 2) | Multi-attribute expected utility evaluation (\(E[U] = \sum w_i u_i\)) with dynamic spatial modulation (distance, threat, affordances). |
 | `replan` | Strategic (System 2) | Adaptive goal DAG reconstruction and fallback strategy formulation upon blockers or failures. |
-| `assess_risk` | Strategic (System 2) | Quantitative threat calculation, rollout path collision probability, and worst-case impact analysis. |
+| `assess_risk` | Strategic (System 2) | Quantitative threat calculation, rollout path collision probability, worst-case impact analysis, and physics-aware spatial rollout evaluation (`assess_risk(action: 'spatial_rollout')`). |
 | `query_knowledge` | Strategic (System 2) | FTS5 semantic search over historical decision traces, tactical rules, and domain heuristics. |
 | `set_utility_weights` | Strategic (System 2) | Configures utility profiles (aggression, caution, greed, efficiency, exploration, cooperation). |
 | `get_decision_trace` | Strategic (System 2) | Explainable chain-of-thought rationale playback, scoring breakdowns, and latency telemetry. |
-| `manage_beliefs` | Strategic (System 2) | Probabilistic belief tracking with exponential confidence decay and spatial coordinate anchors. |
+| `manage_beliefs` | Strategic (System 2) | Probabilistic belief tracking with exponential confidence decay, spatial coordinate anchors, and spatial belief reconciliation (`manage_beliefs(action: 'reconcile_spatial')`). |
 | `manage_intentions` | Coordination | Queue, dispatch, track, and resolve behavior directives (wire contract) for `behavior-mcp`. |
 | `manage_reasoning_db` | Storage & Audit | Database maintenance, diagnostics, snapshots, and SHA-256 Merkle audit verification. |
 | `classify` | Fast Path (System 1) | Ultra-low-latency ($<1\text{ms}$) categorical classification over multi-modal StatePacks. |
@@ -114,7 +114,7 @@ This document provides a comprehensive operational catalog of the **68 specializ
 
 | Tool | Action Modes | Description |
 | :--- | :--- | :--- |
-| `load_behavior` | `load`, `hot-swap` | Injects, initializes, and starts behavior tree execution loops in the target browser or game runtime. |
+| `load_behavior` | `load`, `hot-swap` | Injects, initializes, and starts behavior tree execution loops with support for typed spatial condition nodes (`spatial_distance`, `spatial_affordance`). |
 | `set_parameters` | `set`, `get`, `reset` | Dynamically updates runtime execution parameters and variables on active behavior instances. |
 | `get_status` | `current`, `history` | Queries active execution status, current node traversal path, tick counter, duration, and error state. |
 | `abort_behavior` | `abort`, `pause`, `resume`, `unstick` | Immediately halts execution, pauses loop, or triggers unstick recovery with input disengagement. |
@@ -122,8 +122,8 @@ This document provides a comprehensive operational catalog of the **68 specializ
 | `replay_recording` | `capture`, `list`, `replay` | Records and replays deterministic frame sequences with adaptive timing synchronization. |
 | `get_metrics` | `current`, `history` | Retrieves runtime execution telemetry, tick duration histograms ($<16.6\text{ms}$), and stuck scores. |
 | `manage_behaviors` | `register`, `get`, `list`, `synthesize` | CRUD operations for immutable JSON behavior tree definitions with SHA-256 tree hash verification. |
-| `manage_blackboard` | `get`, `set`, `delete`, `lease`, `list` | Reads, writes, leases, and inspects shared blackboard state variables (including `semantic_decision_*`). |
-| `manage_runtime_db` | `stats`, `audit`, `doctor`, `snapshot` | Database maintenance, health diagnostics, and SHA-256 Merkle audit verification. |
+| `manage_blackboard` | `get`, `set`, `delete`, `lease`, `list`, `ingest_slice` | Reads, writes, leases, and inspects shared blackboard variables, and ingests compact spatial/visual slices (`ingest_slice`) with TTL staleness guards. |
+| `manage_runtime_db` | `stats`, `audit`, `doctor`, `snapshot`, `drain_spool` | Database maintenance, health diagnostics, SHA-256 Merkle audit verification, and off-tick draining of the 60Hz SpoolEngine ring buffer (`drain_spool`). |
 
 ---
 
